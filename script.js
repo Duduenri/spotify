@@ -1,9 +1,10 @@
 // Client ID fornecido pelo Spotify Developer Dashboard
-const clientId = 'SEU_CLIENT_ID';
+const clientId = 'c5d3988c8fef4851b918e7f2b412e713';
 // URL de redirecionamento configurada no Spotify Developer Dashboard
-const redirectUri = 'http://localhost:8000/callback';
+const redirectUri = 'https://spotify-three-sandy.vercel.app/';
 // Escopos de permissão necessários
 const scopes = 'user-top-read';
+
 
 document.getElementById('login-button').addEventListener('click', () => {
   window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scopes)}&response_type=token`;
