@@ -5,31 +5,11 @@ const redirectUri = 'https://spotify-three-sandy.vercel.app/';
 // Escopos de permissão necessários
 const scopes = 'user-top-read';
 
-
 document.getElementById('login-button').addEventListener('click', () => {
   window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scopes)}&response_type=token`;
 });
 
-// Função para extrair parâmetros da URL
-function getParamsFromUrl() {
-  const params = {};
-  const queryString = window.location.hash.substring(1);
-  const urlParams = new URLSearchParams(queryString);
-  for (const [key, value] of urlParams) {
-    params[key] = value;
-  }
-  return params;
-}
-
-window.onload = function() {
-  const params = getParamsFromUrl();
-  if (params.access_token) {
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('top-tracks').style.display = 'block';
-    fetchTopTracks(params.access_token);
-  }
-}
-
+// Função para buscar as músicas mais ouvidas do usuário autenticado
 function fetchTopTracks(accessToken) {
   fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10', {
     headers: {
@@ -48,4 +28,25 @@ function fetchTopTracks(accessToken) {
     });
   })
   .catch(error => console.error('Error fetching top tracks:', error));
+}
+
+// Função para extrair parâmetros da URL
+function getParamsFromUrl() {
+  const params = {};
+  const queryString = window.location.hash.substring(1);
+  const urlParams = new URLSearchParams(queryString);
+  for (const [key, value] of urlParams) {
+    params[key] = value;
+  }
+  return params;
+}
+
+// Chama a função para buscar as músicas mais ouvidas quando a página carrega
+window.onload = function() {
+  const params = getParamsFromUrl();
+  if (params.access_token) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('top-tracks').style.display = 'block';
+    fetchTopTracks(params.access_token);
+  }
 }
