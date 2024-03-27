@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  #login, #top-tracks {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #login-button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  #tracks-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #tracks-list li {
+    margin-bottom: 10px;
+  }
+  
